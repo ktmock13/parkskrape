@@ -60,7 +60,7 @@ app.get('/', (req: Request, res: Response) => {
 
 // Users page
 app.get('/users', (req: Request, res: Response) => {
-  return res.sendFile('users.html', { root: viewsDir });
+  // return res.sendFile('users.html', { root: viewsDir });
 
   const jwt = req.signedCookies[envVars.cookieProps.key];
   if (!jwt) {
