@@ -14,16 +14,14 @@ import logger from 'jet-logger';
 import envVars from '@shared/env-vars';
 import { CustomError } from '@shared/errors';
 
-
 // **** Init express **** //
 
 const app = express();
 
-
 // **** Set basic express settings **** //
 
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(envVars.cookieProps.secret));
 
 // Show routes called in console during development
@@ -42,12 +40,11 @@ app.use('/api', BaseRouter);
 // Error handling
 app.use((err: Error | CustomError, _: Request, res: Response, __: NextFunction) => {
   logger.err(err, true);
-  const status = (err instanceof CustomError ? err.HttpStatus : StatusCodes.BAD_REQUEST);
+  const status = err instanceof CustomError ? err.HttpStatus : StatusCodes.BAD_REQUEST;
   return res.status(status).json({
     error: err.message,
   });
 });
-
 
 // **** Serve front-end content **** //
 
@@ -58,16 +55,18 @@ app.use(express.static(staticDir));
 
 // Login page
 app.get('/', (req: Request, res: Response) => {
-  return res.sendFile('login.html', {root: viewsDir});
+  return res.sendFile('login.html', { root: viewsDir });
 });
 
 // Users page
 app.get('/users', (req: Request, res: Response) => {
+  return res.sendFile('users.html', { root: viewsDir });
+
   const jwt = req.signedCookies[envVars.cookieProps.key];
   if (!jwt) {
     return res.redirect('/');
   } else {
-    return res.sendFile('users.html', {root: viewsDir});
+    return res.sendFile('users.html', { root: viewsDir });
   }
 });
 
@@ -77,10 +76,9 @@ app.get('/chat', (req: Request, res: Response) => {
   if (!jwt) {
     return res.redirect('/');
   } else {
-    return res.sendFile('chat.html', {root: viewsDir});
+    return res.sendFile('chat.html', { root: viewsDir });
   }
 });
-
 
 // **** Setup Socket.io **** //
 
@@ -92,7 +90,6 @@ const io = new SocketIo(server);
 io.sockets.on('connect', () => {
   return app.set('socketio', io);
 });
-
 
 // **** Export default **** //
 

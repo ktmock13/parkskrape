@@ -4,12 +4,10 @@ import { Request, Response, NextFunction } from 'express';
 import { cookieProps } from '@routes/auth-router';
 import jwtUtil from '@util/jwt-util';
 
-
 // **** Variables **** //
 
 const { UNAUTHORIZED } = StatusCodes;
 const jwtNotPresentErr = 'JWT not present in signed cookie.';
-
 
 // **** Functions **** //
 
@@ -36,4 +34,8 @@ export async function authMw(req: Request, res: Response, next: NextFunction) {
       error: err.message,
     });
   }
-};
+}
+
+export async function emptyMw(req: Request, res: Response, next: NextFunction) {
+  next();
+}
