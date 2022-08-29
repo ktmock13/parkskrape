@@ -1,11 +1,11 @@
 {
-  "name": "parkskrape",
-  "version": "0.0.0",
+  "name": "parkskraspe",
+  "version": "0.0.1",
   "scripts": {
     "build": "npx ts-node build.ts",
     "format": "npx prettier --write .",
     "lint": "eslint . --ext .ts",
-    "start": "node src",
+    "start": "node -r module-alias/register ./dist --env=production",
     "start:dev": "nodemon",
     "test": "nodemon --config ./spec/nodemon.json",
     "test:no-reloading": "npx ts-node --files -r tsconfig-paths/register ./spec"
