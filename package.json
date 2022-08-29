@@ -5,7 +5,7 @@
     "build": "npx ts-node build.ts",
     "format": "npx prettier --write .",
     "lint": "eslint . --ext .ts",
-    "start": "node -r module-alias/register ./dist --env=production",
+    "start": "JWT_SECRET=tKLMKEmrQTjli2rNm5k1C5I3NFGnugLiPKOBxW3Eb5EqZcrYsCXNuRlrIHizSO0RzVQ0njJForGz2zPDZtUZOmh3waAiN6HTQIVN COOKIE_SECRET=aZipwgnhiaV3laKAIcqKlPhzP0cnDF8cipJH1ZJqmxIBrC2eXUMzWCsqt5Oza8NbjpqXJOhmUzC603VnXvWk1v8neAFwaBHHeU9K node -r module-alias/register ./dist --env=production",
     "start:dev": "nodemon",
     "test": "nodemon --config ./spec/nodemon.json",
     "test:no-reloading": "npx ts-node --files -r tsconfig-paths/register ./spec"
